@@ -1,3 +1,4 @@
+import path from 'path'
 import bodyParser from 'koa-bodyparser'
 import session from 'koa-session'
 import logger from 'koa-logger'
@@ -5,7 +6,7 @@ import KoaStatic from 'koa-static'
 import responseFormatter from '../lib/responseFormatter'
 
 const addStatic = app => {
-  app.use(KoaStatic(('../../blog/dist')))
+  app.use(KoaStatic(path.join(__dirname, '../../blog/dist')))
 }
 
 const addBodyParser = app => {
