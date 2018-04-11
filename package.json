@@ -6,7 +6,8 @@
   "author": "b1anker",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon start.js",
+    "start": "nohup cross-env NODE_ENV=development node start.js &",
+    "dev": "cross-env NODE_ENV=development nodemon start.js &",
     "lint": "eslint app.js",
     "lint:fix": "eslint app.js --fix"
   },
