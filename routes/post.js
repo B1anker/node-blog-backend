@@ -3,7 +3,6 @@ import {
   Post,
   Required,
   Auth,
-  Put,
   Get
 } from '../decorator/router'
 import mongoose from 'mongoose'
@@ -25,7 +24,7 @@ class AdminRouter {
   }
 
   @Post('/add')
-  @Auth('admin')
+  @Auth(['admin', 'superAdmin'])
   @Required({
     body: ['title', 'content']
   })
