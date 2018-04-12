@@ -17,7 +17,7 @@ const addLogger = app => {
   app.use(logger())
 }
 
-const formatResponse = async (app) => {
+const formatResponse = async app => {
   app.use(responseFormatter('^/api'))
 }
 

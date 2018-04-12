@@ -905,6 +905,10 @@ bluebird@3.5.0:
   version "3.5.0"
   resolved "http://r.cnpmjs.org/bluebird/download/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
+bluebird@^3.5.0:
+  version "3.5.1"
+  resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
+
 boom@2.x.x:
   version "2.10.1"
   resolved "http://r.cnpmjs.org/boom/download/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
@@ -1418,7 +1422,7 @@ error-inject@~1.0.0:
   version "1.0.0"
   resolved "http://r.cnpmjs.org/error-inject/download/error-inject-1.0.0.tgz#e2b3d91b54aed672f309d950d154850fa11d4f37"
 
-escape-html@~1.0.1:
+escape-html@~1.0.1, escape-html@~1.0.3:
   version "1.0.3"
   resolved "http://r.cnpmjs.org/escape-html/download/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
 
@@ -2034,6 +2038,12 @@ iconv-lite@0.4.19, iconv-lite@^0.4.17:
   version "0.4.19"
   resolved "http://r.cnpmjs.org/iconv-lite/download/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
+iconv-lite@^0.4.18:
+  version "0.4.21"
+  resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
+  dependencies:
+    safer-buffer "^2.1.0"
+
 ignore-by-default@^1.0.1:
   version "1.0.1"
   resolved "http://r.cnpmjs.org/ignore-by-default/download/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
@@ -2461,9 +2471,9 @@ koa-router@^7.4.0:
     path-to-regexp "^1.1.1"
     urijs "^1.19.0"
 
-koa-send@^4.1.0:
+koa-send@^4.1.0, koa-send@^4.1.3:
   version "4.1.3"
-  resolved "http://r.cnpmjs.org/koa-send/download/koa-send-4.1.3.tgz#0822207bbf5253a414c8f1765ebc29fa41353cb6"
+  resolved "http://registry.npm.taobao.org/koa-send/download/koa-send-4.1.3.tgz#0822207bbf5253a414c8f1765ebc29fa41353cb6"
   dependencies:
     debug "^2.6.3"
     http-errors "^1.6.1"
@@ -2486,6 +2496,12 @@ koa-static@^4.0.2:
   dependencies:
     debug "^2.6.8"
     koa-send "^4.1.0"
+
+koa-xtpl@^2.1.1:
+  version "2.1.1"
+  resolved "http://registry.npm.taobao.org/koa-xtpl/download/koa-xtpl-2.1.1.tgz#1275e75bde1dcae35daca47d0df7988ac2169a75"
+  dependencies:
+    node-xtemplate "^0.1.6"
 
 koa@^2.5.0:
   version "2.5.0"
@@ -2788,6 +2804,15 @@ node-pre-gyp@^0.6.39:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
+node-xtemplate@^0.1.6:
+  version "0.1.6"
+  resolved "http://registry.npm.taobao.org/node-xtemplate/download/node-xtemplate-0.1.6.tgz#be3f23b0ae563ad747a015bd63bf809dc16d9ee6"
+  dependencies:
+    bluebird "^3.5.0"
+    iconv-lite "^0.4.18"
+    object-assign "^4.1.1"
+    xtemplate "^4.6.1"
+
 nodemon@^1.17.1:
   version "1.17.1"
   resolved "http://r.cnpmjs.org/nodemon/download/nodemon-1.17.1.tgz#cdb4bc53d7a86d6162143a1a44d7adf927d8652f"
@@ -2854,7 +2879,7 @@ oauth-sign@~0.8.1, oauth-sign@~0.8.2:
   version "0.8.2"
   resolved "http://r.cnpmjs.org/oauth-sign/download/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^4.0.1, object-assign@^4.1.0:
+object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "http://r.cnpmjs.org/object-assign/download/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
 
@@ -3390,6 +3415,10 @@ safe-regex@^1.1.0:
   resolved "http://r.cnpmjs.org/safe-regex/download/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
   dependencies:
     ret "~0.1.10"
+
+safer-buffer@^2.1.0:
+  version "2.1.2"
+  resolved "http://registry.npm.taobao.org/safer-buffer/download/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
 semver-diff@^2.0.0:
   version "2.1.0"
@@ -3965,6 +3994,12 @@ write@^0.2.1:
 xdg-basedir@^3.0.0:
   version "3.0.0"
   resolved "http://r.cnpmjs.org/xdg-basedir/download/xdg-basedir-3.0.0.tgz#496b2cc109eca8dbacfe2dc72b603c17c5870ad4"
+
+xtemplate@^4.6.1:
+  version "4.6.1"
+  resolved "http://registry.npm.taobao.org/xtemplate/download/xtemplate-4.6.1.tgz#11bb4fe31e878bda0af9a139ab4d32fe0cffad3f"
+  dependencies:
+    escape-html "~1.0.3"
 
 yallist@^2.1.2:
   version "2.1.2"

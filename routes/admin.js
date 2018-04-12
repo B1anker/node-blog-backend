@@ -11,6 +11,16 @@ import mongoose from 'mongoose'
 import ApiError from '../lib/ApiError'
 
 const User = mongoose.model('User')
+User.find({}).then((res) => {
+  if (!res.length) {
+    const user = new User({
+      email: 'admin@gmail.com',
+      password: 'admin',
+      username: 'admin'
+    })
+    user.save()
+  }
+})
 
 @Controller('/api/v0/admin')
 class AdminRouter {
