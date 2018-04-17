@@ -12,14 +12,23 @@ const PostSchema = mongoose.model('Post')
 
 @Controller('/api/v0/post')
 class AdminRouter {
-  @Get('list')
-  async getList (ctx, next) {
-    // const { lid } = ctx.session.user
+  @Get('/list')
+  async getPosts (ctx, next) {
     const data = await PostSchema.find()
-    delete data.password
     ctx.body = {
       success: true,
       data
+    }
+  }
+
+  @Get(':pid')
+  async getPost (ctx, next) {
+    const { pid } = ctx.params
+    console.log(ctx.params)
+    const data = await PostSchema.findOne({_id: pid})
+    ctx.body = {
+      success: true,
+      data: [data]
     }
   }
 
