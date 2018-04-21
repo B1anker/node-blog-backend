@@ -3,6 +3,8 @@ import KoaRouter from 'koa-router'
 import glob from 'glob'
 import R from 'ramda'
 import ApiError from '../lib/ApiError'
+import mongoose from 'mongoose'
+const { ObjectId } = mongoose.Types
 
 const pathPrefix = Symbol('pathPrefix')
 const routeMap = []
@@ -103,6 +105,17 @@ const Required = paramsObj => convert(async (ctx, next) => {
   await next()
 })
 
+const ValidObjectId = (type) => {
+  return convert(async (ctx, next) => {
+    const id = ctx.method === 'GET' ? ctx.params[type] : ctx.request.body[type]
+    if (ObjectId.isValid(id)) {
+      await next()
+    } else {
+      throw new ApiError('INVALID_OBJECTID', true)
+    }
+  })
+}
+
 const Auth = (role) => {
   if (!role) {
     role = ['user', 'admin', 'superAdmin']
@@ -128,5 +141,6 @@ export {
   Delete,
   Log,
   Auth,
-  Required
+  Required,
+  ValidObjectId
 }
