@@ -16,7 +16,7 @@ const Postchema = new Schema({
   },
   category: {
     type: String,
-    default: ''
+    default: '默认'
   },
   tags: {
     type: [String],
@@ -25,6 +25,10 @@ const Postchema = new Schema({
   summary: {
     type: String,
     default: ''
+  },
+  deleted: {
+    type: Boolean,
+    default: false
   },
   meta: {
     createdAt: {

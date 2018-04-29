@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Post,
   Required,
   Auth,
@@ -19,7 +20,12 @@ class AdminRouter {
     const data = await PostSchema.find()
     ctx.body = {
       success: true,
-      data
+      data: data.filter((d) => {
+        return !d.deleted
+      }).map((d) => {
+        delete d.deleted
+        return d
+      })
     }
   }
 
@@ -61,9 +67,22 @@ class AdminRouter {
       _id: body.pid
     }).exec()
     Object.assign(post, omit(body, ['pid']))
-    console.log(post)
     post.save()
-    // post.save()
+
+    return (ctx.body = {
+      code: 200
+    })
+  }
+
+  @Delete(':pid')
+  @Auth(['admin', 'superAdmin'])
+  async deletePost (ctx, next) {
+    const { pid } = ctx.params
+    await PostSchema.update({
+      _id: pid
+    }, {
+      deleted: true
+    })
 
     return (ctx.body = {
       code: 200
