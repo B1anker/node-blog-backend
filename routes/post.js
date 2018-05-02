@@ -10,7 +10,7 @@ import {
 import mongoose from 'mongoose'
 import omit from 'lodash/omit'
 // import ApiError from '../lib/ApiError'
-
+const ips = []
 const PostSchema = mongoose.model('Post')
 
 @Controller('/api/v0/post')
@@ -34,6 +34,14 @@ class AdminRouter {
   async getPost (ctx, next) {
     const { pid } = ctx.params
     const data = await PostSchema.findOne({_id: pid})
+    if (!~ips.indexOf(ctx.request.ip)) {
+      ips.push(ctx.request.ip)
+      data.count++
+      await data.save()
+      setTimeout(() => {
+        ips.splice(ips.indexOf(ctx.request.ip), 1)
+      }, 1000 * 60 * 60 * 24)
+    }
     ctx.body = {
       success: true,
       data: [data]
