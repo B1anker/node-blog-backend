@@ -16,3 +16,16 @@ Error: listen EADDRINUSE :::3000
     at Function.Module.runMain (module.js:678:11)
     at startup (bootstrap_node.js:187:16)
     at bootstrap_node.js:608:3
+env:  production
+App listening on port 8200
+Connected to MongoDB ->  mongodb://localhost/blog
+env:  production
+App listening on port 8200
+Connected to MongoDB ->  mongodb://localhost/blog
+env:  production
+App listening on port 3000
+Connected to MongoDB ->  mongodb://localhost/blog
+  <-- POST /api/v0/admin/login
+  --> POST /api/v0/admin/login 200 106ms 70b
+  <-- GET /api/v0/admin/info
+  --> GET /api/v0/admin/info 200 6ms 90b
