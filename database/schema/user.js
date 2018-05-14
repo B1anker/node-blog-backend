@@ -49,20 +49,13 @@ UserSchema.pre('save', function (next) {
   next()
 })
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', async function (next) {
   let user = this
-
-  if (!user.isModified('password')) return next()
-
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-    if (err) return next(err)
-
-    bcrypt.hash(user.password, salt, (error, hash) => {
-      if (error) return next(error)
-      user.password = hash
-      next()
-    })
-  })
+  if (!user.isModified('password')) {
+    return next()
+  }
+  user.password = await encrypt(user.password)
+  next()
 })
 
 UserSchema.methods = {
@@ -75,13 +68,14 @@ UserSchema.methods = {
     })
   },
 
-  changeRole (type) {
+  async changeUserInfo (params) {
     const self = this
+    if (params.password) {
+      params.password = await encrypt(params.password)
+    }
     return new Promise((resolve, reject) => {
       self.update({
-        $set: {
-          role: type
-        }
+        $set: params
       }, (err) => {
         if (!err) resolve(true)
         else reject(err)
@@ -125,6 +119,18 @@ UserSchema.methods = {
       }
     })
   }
+}
+
+async function encrypt (password) {
+  return new Promise((resolve, reject) => {
+    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+      if (err) return reject(err)
+      bcrypt.hash(password, salt, (error, hash) => {
+        if (error) return reject(error)
+        resolve(hash)
+      })
+    })
+  })
 }
 
 mongoose.model('User', UserSchema)

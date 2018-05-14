@@ -6,7 +6,7 @@ import {
   Put,
   Get
 } from '../decorator/router'
-import { checkPassword, changeRole, getUserInfo } from '../service/admin'
+import { checkPassword, changeUserInfo, changeRole, getUserInfo } from '../service/admin'
 import mongoose from 'mongoose'
 import ApiError from '../lib/ApiError'
 
@@ -14,9 +14,10 @@ const User = mongoose.model('User')
 User.find({}).then((res) => {
   if (!res.length) {
     const user = new User({
-      email: 'admin@gmail.com',
+      email: 'b1anker@163.com',
       password: 'admin',
-      username: 'admin'
+      username: 'admin',
+      role: 'superAdmin'
     })
     user.save()
   }
@@ -88,18 +89,15 @@ class AdminRouter {
     })
   }
 
-  @Put('/changeRole')
+  @Put('/changeUserInfo')
   @Required({
-    body: ['roleType', 'username']
+    body: ['username']
   })
   @Auth(['admin', 'superAdmin'])
-  async changeUserRole (ctx, next) {
-    const { roleType, username } = ctx.request.body
+  async changeUserInfo (ctx, next) {
+    const { username } = ctx.request.body
     const role = ctx.session.user.role
-    if (roleType === 'superAdmin' && role !== 'superAdmin') {
-      throw new ApiError('PERMISSION_DENIED', true)
-    }
-    const user = await changeRole(roleType, username)
+    const user = await changeUserInfo(ctx.request.body, username, role)
     if (user.username === ctx.session.user.username) {
       ctx.session.user = {
         _id: user._id,

@@ -26,6 +26,22 @@ async function checkPassword (username, password) {
   }
 }
 
+async function changeUserInfo (params, username, role) {
+  const user = await User.findOne({ username: username }).exec()
+  if (!user) {
+    throw new ApiError('USER_NOT_EXIST', true)
+  }
+  if (user.role === 'admin' && role === 'superAdmin') {
+    throw new ApiError('PERMISSION_DENIED', true)
+  }
+  try {
+    await user.changeUserInfo(params)
+  } catch (err) {
+    throw new ApiError('DATABASE_ERROR', true)
+  }
+  return user
+}
+
 async function changeRole (type, username) {
   const user = await User.findOne({ username: username }).exec()
   if (!user) {
@@ -46,5 +62,6 @@ async function changeRole (type, username) {
 export {
   getUserInfo,
   checkPassword,
+  changeUserInfo,
   changeRole
 }
