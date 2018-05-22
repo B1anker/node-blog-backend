@@ -8,3 +8,4 @@ npm-error.log
 jsconfig.json
 npm-debug.log
 dist
+nohup.out
