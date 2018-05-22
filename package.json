@@ -6,7 +6,9 @@
   "author": "b1anker",
   "license": "MIT",
   "scripts": {
-    "start": "nohup cross-env NODE_ENV=production node start.js &",
+    "start": "nohup cross-env NODE_ENV=production pm2 start start.js  -i max &",
+    "stop": "pm2 stop all",
+    "l": "pm2 list",
     "dev": "cross-env NODE_ENV=development nodemon start.js",
     "lint": "eslint app.js",
     "lint:fix": "eslint app.js --fix"
@@ -23,6 +25,7 @@
     "koa-static": "^4.0.2",
     "koa-xtpl": "^2.1.1",
     "mongoose": "^5.0.9",
+    "pm2": "^2.10.4",
     "ramda": "^0.25.0"
   },
   "devDependencies": {

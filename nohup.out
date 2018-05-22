@@ -29,3 +29,38 @@ Connected to MongoDB ->  mongodb://localhost/blog
   --> POST /api/v0/admin/login 200 106ms 70b
   <-- GET /api/v0/admin/info
   --> GET /api/v0/admin/info 200 6ms 90b
+  <-- GET /api/v0/post/list
+  --> GET /api/v0/post/list 200 5ms 26b
+[PM2] Spawning PM2 daemon with pm2_home=/Users/b1anker/.pm2
+[PM2] PM2 Successfully daemonized
+[PM2] Starting /Users/b1anker/GitHub/react-blog-backend/start.js in fork_mode (1 instance)
+[PM2] Done.
+┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬─────────┬──────────┐
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user    │ watching │
+├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────┼───────────┼─────────┼──────────┤
+│ start    │ 0  │ fork │ 42488 │ online │ 0       │ 0s     │ 0%  │ 14.1 MB   │ b1anker │ disabled │
+└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴─────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
+events.js:183
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: spawn pm2start ENOENT
+    at _errnoException (util.js:1024:11)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:190:19)
+    at onErrorNT (internal/child_process.js:372:16)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+    at Function.Module.runMain (module.js:678:11)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3
+[PM2][WARN] You are starting 0 processes in fork_mode without load balancing. To enable it remove -x option.
+[PM2] Applying action restartProcessId on app [start](ids: 0)
+[PM2] [start](0) ✓
+[PM2] Process successfully started
+┌──────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────┬───────────┬─────────┬──────────┐
+│ App name │ id │ mode │ pid   │ status │ restart │ uptime │ cpu │ mem       │ user    │ watching │
+├──────────┼────┼──────┼───────┼────────┼─────────┼────────┼─────┼───────────┼─────────┼──────────┤
+│ start    │ 0  │ fork │ 43426 │ online │ 37      │ 0s     │ 4%  │ 13.4 MB   │ b1anker │ disabled │
+└──────────┴────┴──────┴───────┴────────┴─────────┴────────┴─────┴───────────┴─────────┴──────────┘
+ Use `pm2 show <id|name>` to get more details about an app
