@@ -6,7 +6,7 @@ import {
   Put,
   Get
 } from '../decorator/router'
-import { checkPassword, changeUserInfo, changeRole, getUserInfo } from '../service/admin'
+import { checkPassword, changeUserInfo, getUserInfo } from '../service/admin'
 import mongoose from 'mongoose'
 import ApiError from '../lib/ApiError'
 
