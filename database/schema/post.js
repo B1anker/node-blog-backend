@@ -18,7 +18,7 @@ const Postchema = new Schema({
     type: Number,
     default: 0
   },
-  category: {
+  categories: {
     type: String,
     default: '默认'
   },

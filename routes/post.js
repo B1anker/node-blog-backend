@@ -75,7 +75,6 @@ class AdminRouter {
     const post = await PostSchema.findOne({
       _id: body.pid
     }).exec()
-    console.log(post)
     Object.assign(post, omit(body, ['pid']))
     post.save()
 
