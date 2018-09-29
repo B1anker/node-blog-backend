@@ -10,6 +10,8 @@ import {
 } from '../decorator/router'
 import mongoose from 'mongoose'
 import omit from 'lodash/omit'
+import dayjs from 'dayjs'
+
 // import ApiError from '../lib/ApiError'
 const ips = []
 const PostSchema = mongoose.model('Post')
@@ -17,7 +19,7 @@ const PostSchema = mongoose.model('Post')
 @Controller('/api/v0/post')
 class AdminRouter {
   @Get('/list')
-  async getPosts (ctx, next) {
+  async getPosts (ctx) {
     const data = await PostSchema.find()
     ctx.body = {
       success: true,
@@ -26,13 +28,15 @@ class AdminRouter {
       }).map((d) => {
         delete d.deleted
         return d
+      }).sort((a, b) => {
+        return dayjs(b.meta.createdAt).unix() - dayjs(a.meta.createdAt).unix()
       })
     }
   }
 
   @Get(':pid')
   @ValidObjectId('pid')
-  async getPost (ctx, next) {
+  async getPost (ctx) {
     const { pid } = ctx.params
     const data = await PostSchema.findOne({_id: pid})
     if (!~ips.indexOf(ctx.request.ip)) {
@@ -54,11 +58,15 @@ class AdminRouter {
   @Required({
     body: ['title', 'content']
   })
-  async addPost (ctx, next) {
+  async addPost (ctx) {
     const body = ctx.request.body
-    const post = new PostSchema(body)
+    const post = new PostSchema({
+      ...body,
+      meta: {
+        createdAt: body.date
+      }
+    })
     post.save()
-
     return (ctx.body = {
       code: 200
     })
@@ -70,12 +78,16 @@ class AdminRouter {
   @Required({
     body: ['pid']
   })
-  async updatePost (ctx, next) {
+  async updatePost (ctx) {
     const body = ctx.request.body
     const post = await PostSchema.findOne({
       _id: body.pid
     }).exec()
-    Object.assign(post, omit(body, ['pid']))
+    Object.assign(post, omit(body, ['pid']), {
+      meta: {
+        createdAt: body.date || post.meta.createdAt
+      }
+    })
     post.save()
 
     return (ctx.body = {
@@ -85,7 +97,7 @@ class AdminRouter {
 
   @Delete(':pid')
   @Auth(['admin', 'superAdmin'])
-  async deletePost (ctx, next) {
+  async deletePost (ctx) {
     const { pid } = ctx.params
     await PostSchema.update({
       _id: pid

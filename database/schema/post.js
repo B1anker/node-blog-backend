@@ -48,9 +48,13 @@ const Postchema = new Schema({
 
 Postchema.pre('save', function (next) {
   if (this.isNew) {
-    this.meta.createdAt = this.meta.updateAt = Date.now()
+    if (!this.meta.createdAt) {
+      this.meta.createdAt = this.meta.updateAt = Date.now()
+    } else {
+      this.meta.updatedAt = this.meta.createdAt
+    }
   } else {
-    this.meta.updateAt = Date.now()
+    this.meta.updatedAt = Date.now()
   }
   next()
 })
